@@ -27,8 +27,6 @@ RDEPEND="|| ( >=dev-lang/python-2.6 dev-python/simplejson )
 
 DEPEND="${RDEPEND}"
 
-PATCHES=( "${FILESDIR}/${P}-disaple-updates.patch" )
-
 src_unpack() {
 	unpack ${A}
 	cd "${S}"
