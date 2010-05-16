@@ -5,7 +5,7 @@
 PYTHON_USE_WITH="sqlite"
 EAPI="2"
 
-inherit eutils fdo-mime distutils python
+inherit distutils eutils fdo-mime python
 
 NEED_PYTHON=2.5
 
@@ -30,21 +30,29 @@ RDEPEND="|| ( >=dev-lang/python-2.6 dev-python/simplejson )
 
 DEPEND="${RDEPEND}"
 
-PATCHES=( "${FILESDIR}/${P}-disable-updates.patch" )
-
-pkg_setup() {
-	python_pkg_setup
-}
+#pkg_setup() {
+#	python_pkg_setup
+#}
 
 src_unpack() {
 	unpack ${A}
-	cd "${S}"
-	epatch "${FILESDIR}/${P}-disable-updates.patch"
+	cd ${S}
+	epatch ${FILESDIR}/${P}-disable-updates.patch
+}
+
+src_compile() {
+	export USER=$USERNAME
+	distutils_src_compile
 }
 
 src_install() {
+	export USER=$USERNAME
 	doicon data/zim.png
 	distutils_src_install
+}
+
+src_test() {
+	${python} test.py || die "src_test failed"
 }
 
 pkg_postinst() {
