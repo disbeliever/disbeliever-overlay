@@ -11,3 +11,6 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
+DEPEND=">=dev-util/cmake-2.8.1
+>=x11-libs/qt-gui-4.5:4"
+RDEPEND="${DEPEND}"
